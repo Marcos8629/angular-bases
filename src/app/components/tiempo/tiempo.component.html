@@ -1,0 +1,101 @@
+<div class="container">
+<h4>
+    Consulta del tiempo por ciudad
+</h4>
+<div class="col-lg-6 col-md-6 alineacion card">
+    <form [formGroup]="formulario" (ngSubmit)="consultar()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Ciudad</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" 
+          aria-describedby="emailHelp" formControlName="ciudad"> <!-- se agrega el formControl name con el nombre establecido en el archivo de tiempo.component.ts-->
+            <p class="text-danger" *ngIf="formulario.get('ciudad')?.invalid && formulario.get('ciudad')?.touched"> Escriba solo letras y no incluir la ciudad de Santiago</p>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Codigo Ciudad</label>
+          <input type="text" class="form-control"
+           id="exampleInputPassword1" formControlName="codigo">
+           <p class="text-danger" *ngIf="formulario.get('codigo')?.invalid && formulario.get('codigo')?.touched"> Escriba solo letras </p>
+        
+        </div>
+        <button type="submit" class="btn btn-primary">Consultar</button>
+      </form>
+      <p class="text-danger" *ngIf="showError">{{mensajeError}}</p>
+</div>
+<div class="col-lg-6 col-md-6  alineacion">
+    <div class="card">
+        <div class="card-body">
+            <ul>
+                <li>Descripcion: {{ descripcion  }}</li>
+                <li>Temperatura: {{ temperatura }}</li>
+                <li>Humedad: {{ humedad }}</li>
+                <li>Ciudad: {{ name }}</li>
+                <li>Latitud:  {{  latitud }}</li>
+                <li>Longitud: {{ longitud }} </li>
+            </ul>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="container">
+
+    <input type='checkbox' id="myCheck" [(ngModel)]="data.IMC" /> Pruebas checkbox
+    <input type='checkbox' id="myCheck" [(ngModel)]="data.ValidaSaldo" /> Pruebas chec
+    <input type='checkbox' id="myCheck" [(ngModel)]="data.Cliente_VIP" /> Pruebas
+    
+    <button (click) = "fnClick()"> Do it</button> 
+</div>
+
+
+<div class="container">
+        <dl>
+            <td> Nombre </td>
+            <dd> {{ nombre }}</dd>
+
+            <td> Edad  </td>
+            <dd> {{ age }}</dd>
+
+        </dl>
+
+ <button  *ngIf="nombre !== 'Spiderman'"
+ class=" btn btn-primary mx-2" (click) ="changeHero()">
+     Cambiar nombre </button>
+<button 
+*ngIf="age !== 25"
+class="btn btn-primary mx-2"  (click) ="changeAge()"> Cambiar edad </button>
+<button (click) ="resetForm()"> RESET </button>
+
+</div>
+
+
+<hr>
+
+<div class="container p-3">
+
+    <h1>Ejercicio for each</h1>
+
+
+    <div *ngIf="deleteHero ; else nothingWasDeleted">
+    <h3> Heroe borrado <small class="text-danger">  {{ deleteHero }}  </small></h3>
+    </div>
+
+
+   <ng-template #nothingWasDeleted>
+    <h3> No ha borrado nada </h3>
+   </ng-template>
+
+   <button *ngIf="heroNames.length > 0"
+    (click) ="removeLastHero()" 
+    class="btn btn-outline-danger"> borrar ultimo heroe </button>
+
+    
+    <ul class="mt-2 list-group">
+        <li class="list-group-item" *ngFor="let names of heroNames">
+                {{names }}
+        </li>
+    </ul>
+
+
+</div>
+
+
